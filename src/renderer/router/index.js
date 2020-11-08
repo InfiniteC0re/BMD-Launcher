@@ -11,8 +11,9 @@ export default new Router({
       component: require('@/components/LoginScreen').default
     },
     {
-      path: '*',
-      redirect: '/'
+      path: '/registration',
+      name: 'registration-page',
+      component: require("@/components/RegistrationScreen").default
     }
   ]
 })

@@ -1,5 +1,5 @@
 <template>
-  <div id="input-container">
+  <div id="input-container" :class="{'valid': state == 1, 'showError': state == -1}">
     <div class="icon">
       <slot />
     </div>
@@ -9,16 +9,30 @@
         <a>{{ buttonText }}</a>
       </div>
       <input :type="type" :placeholder="placeholder" @input="handleInput" :value="value" />
+      <div class="state-icon">
+        <ErrorIcon v-if="state == -1" />
+        <ValidIcon v-if="state == 1"/>
+      </div>
+      <div class="bottom-text">
+        <p>{{ error }}</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import ErrorIcon from "../Icons/Error";
+import ValidIcon from "../Icons/Valid";
+
 export default {
   name: "input-component",
   model: {
     prop: "value",
     event: "input",
+  },
+  components: {
+    ErrorIcon,
+    ValidIcon
   },
   props: {
     value: {
@@ -27,7 +41,7 @@ export default {
     },
     text: {
       type: String,
-      default: "Unnamed",
+      default: "тут нет текста",
     },
     type: {
       type: String,
@@ -35,7 +49,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: "Placeholder",
+      default: "подсказка",
     },
     buttonText: {
       type: String,
@@ -45,6 +59,18 @@ export default {
       type: Function,
       default: () => {},
     },
+    valid: {
+      type: Boolean,
+      default: true
+    },
+    error: {
+      type: String,
+      default: "ошибка"
+    },
+    state: {
+      type: Number,
+      default: 0
+    }
   },
   methods: {
     handleInput(e) {
@@ -58,6 +84,8 @@ export default {
 #input-container {
   display: flex;
   align-items: center;
+  position: relative;
+  margin-bottom: 4px;
 }
 .icon {
   width: 24px;
@@ -80,6 +108,11 @@ input {
   font-family: "BMD";
   font-weight: bold;
   cursor: text;
+  transition: 0.2s;
+  padding-right: 24px;
+}
+input:focus {
+  border-color: #000;
 }
 input::placeholder {
   color: #454545;
@@ -98,5 +131,32 @@ input::placeholder {
 .top-text a {
   color: #ff008b;
   cursor: pointer;
+}
+
+.bottom-text {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: #ff008b;
+}
+
+.showError .bottom-text {
+  display: block;
+}
+
+.valid input {
+  border-color: #1BBB0D;
+}
+
+.showError input {
+  border-color: #ff008b;
+}
+
+.state-icon {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
 }
 </style>

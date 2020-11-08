@@ -15,12 +15,17 @@ function createWindow () {
     width: 1024,
     frame: false,
     resizable: false,
+    show: false,
     webPreferences: {
       nodeIntegration: true
     }
   })
 
   mainWindow.loadURL(winURL)
+
+  mainWindow.once("ready-to-show", () => {
+    mainWindow.show();
+  })
 
   mainWindow.on('closed', () => {
     mainWindow = null

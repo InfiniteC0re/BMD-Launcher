@@ -1,20 +1,22 @@
 <template>
   <div id="app">
     <Background />
-    <LoginScreen />
-    <router-view id="__router"></router-view>
+    <Frame />
+    <transition name="slide" mode="out-in" class="full">
+      <router-view id="__router"></router-view>
+    </transition>
   </div>
 </template>
 
 <script>
 import Background from "./components/Background";
-import LoginScreen from "./components/Frame";
+import Frame from "./components/Frame";
 
 export default {
   name: "bmd-launcher",
   components: {
     Background,
-    LoginScreen,
+    Frame
   },
 };
 </script>
@@ -44,6 +46,7 @@ h4 {
 body {
   margin: 0;
   font-family: "BMD";
+  overflow: hidden;
 }
 
 #app {
@@ -98,5 +101,19 @@ body {
   top: 204px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.slide-leave-active,
+.slide-enter-active {
+  transition: 0.22s;
+}
+.slide-enter {
+  will-change: transform, opacity;
+  transform: translate(0, 100%);
+  pointer-events: none;
+}
+.slide-leave-to {
+  transform: translate(0, -100%);
+  opacity: 0;
 }
 </style>

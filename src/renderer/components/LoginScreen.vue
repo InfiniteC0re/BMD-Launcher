@@ -31,7 +31,7 @@
       </div>
       <div class="bottom">
         <h3>Нет аккаунта? Заведи:</h3>
-        <ButtonAlt text="регистрация" :accent="true" style="margin-top: 26px" />
+        <ButtonAlt text="регистрация" :accent="true" @click="openRegistrationScreen" style="margin-top: 26px" />
       </div>
     </div>
   </div>
@@ -69,6 +69,9 @@ export default {
         this.form.buttonDisabled = false;
       else
         this.form.buttonDisabled = true;
+    },
+    openRegistrationScreen() {
+      this.$router.push("/registration");
     },
     login() {
       let { login, password } = this.form;

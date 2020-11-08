@@ -14,7 +14,7 @@ export default {
   props: {
     text: {
       type: String,
-      default: "",
+      default: "ваша реклама может быть здесь",
     },
     wide: {
       type: Boolean,
