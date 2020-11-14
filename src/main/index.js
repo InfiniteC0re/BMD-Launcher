@@ -11,10 +11,14 @@ const winURL = process.env.NODE_ENV === 'development'
 
 function createWindow () {
   mainWindow = new BrowserWindow({
+    minHeight: 670,
+    minWidth: 1024,
     height: 798,
     width: 1024,
+    maxHeight: 798,
+    maxWidth: 1024,
     frame: false,
-    resizable: false,
+    resizable: true,
     show: false,
     webPreferences: {
       nodeIntegration: true

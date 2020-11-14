@@ -42,15 +42,9 @@ export default {
   display: flex;
   align-items: center;
   position: relative;
-}
-
-.checkbox.off {
   background: rgb(230, 230, 230);
 }
 
-.checkbox.on {
-  background: rgb(230, 230, 230);
-}
 
 .checkbox.off::after {
   opacity: 0;
@@ -70,12 +64,12 @@ export default {
 }
 
 .checkbox.off .ball {
-    background: rgb(131, 131, 131);
+    background: #000;
 }
 
 .checkbox.on .ball {
   transform: translateX(100%);
-  background: #000;
+  background: #FF008B;
 }
 
 .checkbox-container {

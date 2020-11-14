@@ -1,6 +1,7 @@
 <template>
   <div>
     <div id="form">
+      <button @click="openMainScreen">главная</button>
       <h2 class="top">Войди в мир bmd:</h2>
       <div class="mainPanel">
         <TextInput
@@ -31,7 +32,12 @@
       </div>
       <div class="bottom">
         <h3>Нет аккаунта? Заведи:</h3>
-        <ButtonAlt text="регистрация" :accent="true" @click="openRegistrationScreen" style="margin-top: 26px" />
+        <ButtonAlt
+          text="регистрация"
+          :accent="true"
+          @click="openRegistrationScreen"
+          style="margin-top: 26px"
+        />
       </div>
     </div>
   </div>
@@ -58,6 +64,10 @@ export default {
       buttonDisabled: true,
     },
   }),
+  mounted() {
+    this.$parent.setLogo(0);
+    this.$parent.setShowHands(true);
+  },
   methods: {
     validateForm() {
       let { login, password } = this.form;
@@ -67,11 +77,13 @@ export default {
         password.replace(/\s/g, "").length > 0
       )
         this.form.buttonDisabled = false;
-      else
-        this.form.buttonDisabled = true;
+      else this.form.buttonDisabled = true;
     },
     openRegistrationScreen() {
       this.$router.push("/registration");
+    },
+    openMainScreen() {
+      this.$router.push("/main");
     },
     login() {
       let { login, password } = this.form;

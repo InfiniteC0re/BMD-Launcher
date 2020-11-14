@@ -1,0 +1,11 @@
+<script>
+export default {
+    name: "base-icon",
+    props: {
+        iconStyle: {
+            type: String,
+            default: ""
+        }
+    }
+}
+</script>

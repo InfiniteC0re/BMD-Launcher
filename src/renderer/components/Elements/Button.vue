@@ -47,21 +47,25 @@ export default {
   justify-content: center;
   align-items: center;
   border-radius: 256px;
-  color: #fff;
+  color: rgba(69,69,69,1);
   font-size: 17px;
   line-height: 36px;
   cursor: pointer;
   transition: 0.2s;
   max-width: 320px;
+  background: #E6E6E6;
+  font-weight: bold;
 }
 .button-container.disabled {
-  background: #E6E6E6;
+  background: #e6e6e6;
   cursor: default !important;
 }
 .accent {
   background: #ff008b;
+  color: #fff;
+  font-weight: normal;
 }
 .wide {
-    width: 100%;
+  width: 100%;
 }
 </style>

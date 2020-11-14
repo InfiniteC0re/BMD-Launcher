@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Background />
+    <Background :logoType="logoType" :showHands="showHands" />
     <Frame />
     <transition name="slide" mode="out-in" class="full">
       <router-view id="__router"></router-view>
@@ -16,7 +16,19 @@ export default {
   name: "bmd-launcher",
   components: {
     Background,
-    Frame
+    Frame,
+  },
+  data: () => ({
+    logoType: 0,
+    showHands: true,
+  }),
+  methods: {
+    setLogo(i) {
+      this.logoType = i;
+    },
+    setShowHands(i) {
+      this.showHands = i;
+    },
   },
 };
 </script>
@@ -31,7 +43,6 @@ export default {
 * {
   box-sizing: border-box;
   user-select: none;
-  cursor: default;
 }
 
 p,
@@ -54,11 +65,7 @@ body {
   width: 100vw;
   display: flex;
   flex-direction: column;
-  background: radial-gradient(
-    ellipse at center top,
-    #4e00b4,
-    #1b005a
-  ); /* #1B005A, #4E00B4*/
+  background: radial-gradient(ellipse at center top, #4e00b4, #1b005a);
 }
 
 #__router {
@@ -115,5 +122,13 @@ body {
 .slide-leave-to {
   transform: translate(0, -100%);
   opacity: 0;
+}
+
+.noEvents {
+  pointer-events: none;
+}
+
+.colorful {
+  color: #ff008b !important;
 }
 </style>
