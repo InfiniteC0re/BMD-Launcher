@@ -64,6 +64,15 @@ export default {
   background: #ff008b;
   color: #fff;
   font-weight: normal;
+  transition: 0.3s ease;
+}
+.accent:hover {
+  background: rgb(255, 255, 255);
+  color: #ff008b;
+}
+.button-container.disabled:hover {
+  background: #e6e6e6;
+  color: #fff;
 }
 .wide {
   width: 100%;

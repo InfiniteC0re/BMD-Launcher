@@ -101,11 +101,25 @@ export default {
     for (let i = 1; i <= gbytes; i++) {
       this.ramValues.push(i * 1024);
     }
+
+    document.addEventListener("click", this.closeMenuEvent);
   },
   methods: {
     toggleMenu() {
       this.opened = !this.opened;
     },
+    closeMenuEvent(e) {
+      if (
+        this.opened == true &&
+        e.target instanceof HTMLElement &&
+        !this.$el.contains(e.target)
+      ) {
+        this.opened = false;
+      }
+    },
+  },
+  beforeDestroy() {
+    document.removeEventListener("click", this.closeMenuEvent);
   },
   props: {},
 };

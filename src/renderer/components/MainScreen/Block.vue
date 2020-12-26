@@ -58,7 +58,6 @@ export default {
           if (res.status == "success") {
             this.players = res.players.now;
             this.slots = res.players.max;
-            console.log(res);
           }
         });
       }

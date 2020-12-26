@@ -29,10 +29,14 @@
     <div class="overlay">
       <div class="table">
         <div class="column1">
-          <span :class="{ colorful: $route.path == '/main' }"
-            >Сервера<span class="servers_count">6</span></span
+          <router-link to="/main" :class="{ colorful: $route.path == '/main' }"
+            >Сервера<span class="servers_count">6</span></router-link
           >
-          <span :class="{ colorful: $route.path == '/music' }">Музыка</span>
+          <router-link
+            to="/music"
+            :class="{ colorful: $route.path == '/music' }"
+            >Музыка</router-link
+          >
           <span :class="{ colorful: $route.path == '/mini-games' }"
             >Мини-игры</span
           >
@@ -46,27 +50,45 @@
         <div class="column2">
           <div class="item">
             <p class="name">В кармане</p>
-            <p class="text">$100,000.43</p>
+            <div class="text purple">
+              <div class="coin bmd"><BMDCoinIcon /></div>
+              100,000.43
+            </div>
           </div>
           <div class="item">
             <p class="name">В банке</p>
-            <p class="text">$250,040.40</p>
+            <div class="text purple">
+              <div class="coin bmd"><BMDCoinIcon /></div>
+              250,040.40
+            </div>
           </div>
           <div class="item">
             <p class="name"><b>Биткойн</b> ($13,454,34)</p>
-            <p class="text">1 BTC</p>
+            <div class="text">
+              <div class="coin btc"><BTCCoinIcon /></div>
+              1 BTC
+            </div>
           </div>
           <div class="item">
             <p class="name"><b>Эфириум</b> ($340,43)</p>
-            <p class="text">100 ETH</p>
+            <div class="text">
+              <div class="coin eth"><ETHCoinIcon /></div>
+              1 ETH
+            </div>
           </div>
           <div class="item">
             <p class="name"><b>Лайткойн</b> ($55,43)</p>
-            <p class="text">10 LTC</p>
+            <div class="text">
+              <div class="coin ltc"><LTCCoinIcon /></div>
+              1 ETH
+            </div>
           </div>
           <div class="item">
             <p class="name"><b>Итого</b></p>
-            <p class="text">$984,492.45</p>
+            <div class="text">
+              <div class="coin bmd"><BMDCoinIcon /></div>
+              984,492.45
+            </div>
           </div>
         </div>
       </div>
@@ -77,23 +99,43 @@
 <script>
 import ButtonAlt from "../Elements/Button";
 import DownArrowIcon from "../Icons/DownArrow";
+import BMDCoinIcon from "../Icons/BMDCoin";
+import BTCCoinIcon from "../Icons/BTCCoin";
+import ETHCoinIcon from "../Icons/ETHCoin";
+import LTCCoinIcon from "../Icons/LTCCoin";
 
 export default {
   name: "header-profile",
   components: {
     ButtonAlt,
     DownArrowIcon,
+    BMDCoinIcon,
+    BTCCoinIcon,
+    ETHCoinIcon,
+    LTCCoinIcon,
   },
   data: () => ({
     opened: false,
   }),
-  mounted() {
-    console.log(this.$route.path);
-  },
   methods: {
     toggleMenu() {
       this.opened = !this.opened;
     },
+    closeMenuEvent(e) {
+      if (
+        this.opened == true &&
+        e.target instanceof HTMLElement &&
+        !this.$el.contains(e.target)
+      ) {
+        this.opened = false;
+      }
+    },
+  },
+  mounted() {
+    document.addEventListener("click", this.closeMenuEvent);
+  },
+  beforeDestroy() {
+    document.removeEventListener("click", this.closeMenuEvent);
   },
   props: {},
 };
@@ -140,7 +182,7 @@ export default {
 .info .balance {
   font-size: 14px;
   margin-left: auto;
-  color: #1bbb0d;
+  color: rgba(107, 57, 249, 1);
 }
 
 .icon {
@@ -204,12 +246,12 @@ export default {
 
 .column1 {
   padding-top: 6px;
-  animation: table1_appear 0.6s forwards;
+  animation: table1_appear 0.8s forwards;
 }
 
 .column2 {
-  animation: table2_appear 0.6s forwards;
-  animation-delay: 0.3s;
+  animation: table2_appear 0.8s forwards;
+  animation-delay: 0.25s;
 }
 
 .column1,
@@ -219,6 +261,7 @@ export default {
   opacity: 0;
 }
 
+.column1 a,
 .column1 span {
   font-size: 16px;
   font-weight: bold;
@@ -227,19 +270,20 @@ export default {
   margin-left: 10px;
   display: flex;
   align-items: center;
+  text-decoration: none;
 }
 
 .servers_count {
-    width: 24px;
-    height: 24px;
-    background: #FF008B;
-    margin-bottom: 0 !important;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff !important;
-    padding-bottom: 3px;
+  width: 24px;
+  height: 24px;
+  background: #ff008b;
+  margin-bottom: 0 !important;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff !important;
+  padding-bottom: 3px;
 }
 
 .column2 .item {
@@ -256,14 +300,45 @@ export default {
 .column2 .item .text {
   font-size: 16px;
   font-weight: bold;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .column2 .item:nth-last-child(1) {
   margin-top: auto;
 }
 
-.column2 .item:nth-last-child(1) .text {
-  color: #1bbb0d;
+.column2 .item:nth-last-child(1) .text,
+.purple {
+  color: rgba(107, 57, 249, 1);
+}
+
+.coin {
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.25),
+    inset 0px 1px 0px rgba(255, 255, 255, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+
+.coin.bmd {
+  background: #6b39f9;
+}
+
+.coin.btc {
+  background: #f8971b;
+}
+
+.coin.eth {
+  background: #454a75;
+}
+
+.coin.ltc {
+  background: #345d9d;
 }
 
 @keyframes table1_appear {
@@ -272,13 +347,17 @@ export default {
     transform: translateX(-60%);
   }
 
-  50% {
+  25% {
     opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateX(0%);
   }
 
   100% {
     opacity: 1;
-    transform: translateX(0%);
   }
 }
 
@@ -288,13 +367,17 @@ export default {
     transform: translateX(60%);
   }
 
-  50% {
+  25% {
     opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateX(0%);
   }
 
   100% {
     opacity: 1;
-    transform: translateX(0%);
   }
 }
 </style>

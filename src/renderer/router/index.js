@@ -19,6 +19,11 @@ export default new Router({
       path: '/main',
       name: 'main-screen',
       component: require("@/components/MainScreen").default
+    },
+    {
+      path: '/music',
+      name: 'music-screen',
+      component: require("@/components/MusicScreen").default
     }
   ]
 })

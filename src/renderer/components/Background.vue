@@ -529,7 +529,7 @@ export default {
   position: absolute;
   left: 50%;
   transform: translate(-50%);
-  top: 65px;
+  top: 58px;
   z-index: 1;
 }
 </style>
