@@ -21,7 +21,8 @@ function createWindow () {
     resizable: true,
     show: false,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      enableRemoteModule: true
     }
   })
 
