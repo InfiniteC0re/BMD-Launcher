@@ -23,7 +23,11 @@ export default {
 .artist-wrap {
   display: flex;
   flex-direction: column;
-  margin-left: 30px;
+  margin-left: 45px;
+}
+
+.artist-wrap:nth-last-child(1) {
+  padding-right: 45px;
 }
 
 .artist-avatar {

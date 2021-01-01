@@ -13,7 +13,7 @@
     </div>
     <h1>{{ name }}</h1>
     <div class="button">
-      <ButtonAlt :accent="true" text="запустить" />
+      <ButtonAlt :white="true" text="запустить" />
     </div>
   </div>
 </template>
@@ -22,8 +22,6 @@
 import UserIcon from "../Icons/User";
 import InfoIcon from "../Icons/Info";
 import ButtonAlt from "../Elements/Button";
-
-import status from "minecraft-server-status";
 
 export default {
   name: "main-screen-block",
@@ -54,12 +52,7 @@ export default {
   methods: {
     refreshServer() {
       if (this.ip != "") {
-        status(this.ip, this.port, (res) => {
-          if (res.status == "success") {
-            this.players = res.players.now;
-            this.slots = res.players.max;
-          }
-        });
+        //
       }
     },
   },
@@ -85,6 +78,7 @@ export default {
   backdrop-filter: blur(16.3097px);
   border-radius: 25px;
   position: relative;
+  height: 281px;
 }
 
 .overlay {

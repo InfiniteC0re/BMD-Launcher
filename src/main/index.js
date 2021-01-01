@@ -1,55 +1,56 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow } from "electron";
 
-if (process.env.NODE_ENV !== 'development') {
-  global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
+if (process.env.NODE_ENV !== "development") {
+  global.__static = require("path")
+    .join(__dirname, "/static")
+    .replace(/\\/g, "\\\\");
 }
 
-let mainWindow
-const winURL = process.env.NODE_ENV === 'development'
-  ? `http://localhost:9080`
-  : `file://${__dirname}/index.html`
+let mainWindow;
+const winURL =
+  process.env.NODE_ENV === "development"
+    ? `http://localhost:9080`
+    : `file://${__dirname}/index.html`;
 
-function createWindow () {
+function createWindow() {
   mainWindow = new BrowserWindow({
-    minHeight: 670,
-    minWidth: 1024,
-    height: 798,
+    height: 768,
     width: 1024,
-    maxHeight: 798,
-    maxWidth: 1024,
-    frame: false,
-    resizable: true,
+    minWidth: 1024,
+    frame: true,
+    resizable: false,
     show: false,
     webPreferences: {
       nodeIntegration: true,
-      enableRemoteModule: true
-    }
-  })
+      enableRemoteModule: true,
+    },
+  });
 
-  mainWindow.loadURL(winURL)
+  mainWindow.loadURL(winURL);
+  mainWindow.setMenu(null);
 
   mainWindow.once("ready-to-show", () => {
     mainWindow.show();
-  })
+  });
 
-  mainWindow.on('closed', () => {
-    mainWindow = null
-  })
+  mainWindow.on("closed", () => {
+    mainWindow = null;
+  });
 }
 
-app.on('ready', createWindow)
+app.on("ready", createWindow);
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
+    app.quit();
   }
-})
+});
 
-app.on('activate', () => {
+app.on("activate", () => {
   if (mainWindow === null) {
-    createWindow()
+    createWindow();
   }
-})
+});
 
 /**
  * Auto Updater

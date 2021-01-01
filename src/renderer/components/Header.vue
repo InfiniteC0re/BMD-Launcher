@@ -1,5 +1,5 @@
 <template>
-  <div id="header">
+  <div id="header" v-show="!hidden">
     <SettingsButton />
     <ProfileButton />
   </div>
@@ -13,17 +13,27 @@ export default {
   name: "header-component",
   components: {
     SettingsButton,
-    ProfileButton
+    ProfileButton,
   },
+  computed: {
+    hidden() {
+      return this.$store.state.hideHeader;
+    }
+  }
 };
 </script>
 
 <style>
 #header {
-  width: 100%;
-  height: 100%;
+  height: 92px;
   display: flex;
   justify-content: space-between;
-  position: relative;
+  position: fixed;
+  left: 0;
+  right: 5px;
+  padding: 16px;
+  backdrop-filter: blur(24px);
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.1);
 }
 </style>

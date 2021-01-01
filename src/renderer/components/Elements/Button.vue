@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="{ 'button-container': true, wide, disabled, accent }"
+    :class="{ 'button-container': true, wide, disabled, accent, white }"
     :style="`height: ${height}px`"
     @click="click"
   >
@@ -32,6 +32,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    white: {
+      type: Boolean,
+      defaulf: false,
+    },
   },
   methods: {
     click() {
@@ -47,13 +51,13 @@ export default {
   justify-content: center;
   align-items: center;
   border-radius: 256px;
-  color: rgba(69,69,69,1);
+  color: rgba(69, 69, 69, 1);
   font-size: 17px;
   line-height: 36px;
   cursor: pointer;
   transition: 0.2s;
   max-width: 320px;
-  background: #E6E6E6;
+  background: #e6e6e6;
   font-weight: bold;
 }
 .button-container.disabled {
@@ -76,5 +80,12 @@ export default {
 }
 .wide {
   width: 100%;
+}
+.white {
+  background: rgba(255, 255, 255, 0.11);
+  color: white;
+}
+.white:hover {
+  background: rgba(255, 255, 255, 0.22);
 }
 </style>

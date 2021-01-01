@@ -29,12 +29,16 @@
     <div class="overlay">
       <div class="table">
         <div class="column1">
-          <router-link to="/main" :class="{ colorful: $route.path == '/main' }"
+          <router-link
+            to="/main"
+            :class="{ colorful: $route.path == '/main' }"
+            @click.native="toggleMenu"
             >Сервера<span class="servers_count">6</span></router-link
           >
           <router-link
             to="/music"
             :class="{ colorful: $route.path == '/music' }"
+            @click.native="toggleMenu"
             >Музыка</router-link
           >
           <span :class="{ colorful: $route.path == '/mini-games' }"

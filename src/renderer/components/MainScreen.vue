@@ -1,72 +1,85 @@
 <template>
   <div>
     <div id="form">
-      <div class="top">
-        <Header />
-      </div>
       <div class="main">
-        <Block name="Vanilla" ip="pvp.land">
-          <template v-slot:icon>
-            <div class="image grass">
-              <img :src="require('@/assets/grasscube.png')" draggable="false" />
-              <img :src="require('@/assets/grasscube.png')" draggable="false" />
-              <img :src="require('@/assets/grasscube.png')" draggable="false" />
-            </div>
-          </template>
-        </Block>
-        <Block name="RPG">
-          <template v-slot:icon>
-            <div class="image wizard">
-              <img :src="require('@/assets/wizard.png')" draggable="false" />
-            </div>
-          </template>
-        </Block>
-        <Block name="Anarchy">
-          <template v-slot:icon>
-            <div class="image wizard">
-              <img :src="require('@/assets/wizard.png')" draggable="false" />
-            </div>
-          </template>
-        </Block>
-        <Block name="Tech & Magic">
-          <template v-slot:icon>
-            <div class="image wizard">
-              <img :src="require('@/assets/wizard.png')" draggable="false" />
-            </div>
-          </template>
-        </Block>
-        <Block name="Creative">
-          <template v-slot:icon>
-            <div class="image wizard">
-              <img :src="require('@/assets/wizard.png')" draggable="false" />
-            </div>
-          </template>
-        </Block>
-        <Block name="Hi-tech">
-          <template v-slot:icon>
-            <div class="image wizard">
-              <img :src="require('@/assets/wizard.png')" draggable="false" />
-            </div>
-          </template>
-        </Block>
+        <div class="blocks" :class="{ bottomM: sound.id }">
+          <Block name="Vanilla" ip="pvp.land">
+            <template v-slot:icon>
+              <div class="image grass">
+                <img
+                  :src="require('@/assets/grasscube.png')"
+                  draggable="false"
+                />
+                <img
+                  :src="require('@/assets/grasscube.png')"
+                  draggable="false"
+                />
+                <img
+                  :src="require('@/assets/grasscube.png')"
+                  draggable="false"
+                />
+              </div>
+            </template>
+          </Block>
+          <Block name="RPG">
+            <template v-slot:icon>
+              <div class="image wizard">
+                <img :src="require('@/assets/wizard.png')" draggable="false" />
+              </div>
+            </template>
+          </Block>
+          <Block name="Anarchy">
+            <template v-slot:icon>
+              <div class="image wizard">
+                <img :src="require('@/assets/wizard.png')" draggable="false" />
+              </div>
+            </template>
+          </Block>
+          <Block name="Tech & Magic">
+            <template v-slot:icon>
+              <div class="image wizard">
+                <img :src="require('@/assets/wizard.png')" draggable="false" />
+              </div>
+            </template>
+          </Block>
+          <Block name="Creative">
+            <template v-slot:icon>
+              <div class="image wizard">
+                <img :src="require('@/assets/wizard.png')" draggable="false" />
+              </div>
+            </template>
+          </Block>
+          <Block name="Hi-tech">
+            <template v-slot:icon>
+              <div class="image wizard">
+                <img :src="require('@/assets/wizard.png')" draggable="false" />
+              </div>
+            </template>
+          </Block>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Header from "./Header";
 import Block from "./MainScreen/Block";
 
 export default {
   name: "main-screen",
   components: {
     Block,
-    Header,
   },
   mounted() {
-    this.$parent.setLogo(1);
+    this.$store.commit("setHideHeader", false);
+    this.$parent.setLogo(0);
+    this.$parent.setTitle("Серверы");
     this.$parent.setShowHands(false);
+  },
+  computed: {
+    sound() {
+      return this.$store.state.soundCloud.currentSound;
+    },
   },
 };
 </script>
@@ -76,19 +89,23 @@ export default {
   display: flex;
   flex-direction: column;
 }
-.top {
-  width: 100%;
-  height: 100px;
-  z-index: 6;
-}
+
 .main {
   flex: 1;
+}
+
+.main .blocks {
   display: grid;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 24px;
+  grid-gap: 12px;
   min-width: 0;
   padding: 24px;
+  margin-top: 84px;
+}
+
+.bottomM {
+  margin-bottom: 100px;
 }
 
 .image {

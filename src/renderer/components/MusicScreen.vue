@@ -1,10 +1,7 @@
 <template>
   <div>
     <div id="form">
-      <div class="top">
-        <Header />
-      </div>
-      <div class="main">
+      <div class="main" :class="{ marginM: sound.id }">
         <div class="people-wrap">
           <Artist
             :artist="artist"
@@ -60,7 +57,6 @@
 </template>
 
 <script>
-import Header from "./Header";
 import Artist from "./MusicScreen/Artist";
 import Track from "./MusicScreen/Track";
 import SearchIcon from "./Icons/Search";
@@ -68,7 +64,6 @@ import SearchIcon from "./Icons/Search";
 export default {
   name: "main-screen",
   components: {
-    Header,
     Artist,
     Track,
     SearchIcon,
@@ -110,13 +105,18 @@ export default {
     ],
   }),
   mounted() {
-    this.$parent.setLogo(1);
+    this.$store.commit("setHideHeader", false);
+    this.$parent.setLogo(0);
+    this.$parent.setTitle("Музыка");
     this.$parent.setShowHands(false);
     this.filteredSounds = this.sounds;
   },
   computed: {
     sounds() {
       return this.$store.state.soundCloud.sounds;
+    },
+    sound() {
+      return this.$store.state.soundCloud.currentSound;
     },
     sortMode() {
       return this.$store.state.soundCloud.sortMode;
@@ -169,14 +169,19 @@ export default {
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  padding-right: 6px;
+  margin-top: 120px;
+}
+
+.marginM {
+  margin-bottom: 100px;
 }
 
 .people-wrap {
   display: flex;
   margin-bottom: 24px;
   min-height: 190px;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .people-wrap::-webkit-scrollbar {
@@ -255,21 +260,12 @@ export default {
 }
 
 .right .column:nth-last-child(1) {
-  margin-right: 29px;
+  margin-right: 17px;
 }
 
 .tracks-wrap {
   margin: 0 12px;
-  overflow: auto;
-}
-
-.tracks-wrap::-webkit-scrollbar {
-  width: 4px;
-}
-
-.tracks-wrap::-webkit-scrollbar-thumb {
-  background-color: white;
-  border-radius: 32px;
+  margin-right: 6px;
 }
 
 .tracks-list {

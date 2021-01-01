@@ -81,10 +81,6 @@ export default {
   padding: 12px;
 }
 
-.track-wrap:nth-last-child(1) {
-  margin-bottom: 0;
-}
-
 .track-stat-info {
   display: flex;
   align-items: center;

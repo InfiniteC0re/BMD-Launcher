@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="form">
-      <button @click="openMainScreen">главная</button>
+      <button @click="openMainScreen" style="position: absolute; bottom: 0;z-index:99999999">главная</button>
       <h2 class="top">Войди в мир bmd:</h2>
       <div class="mainPanel">
         <TextInput
@@ -65,7 +65,9 @@ export default {
     },
   }),
   mounted() {
+    this.$store.commit("setHideHeader", true);
     this.$parent.setLogo(0);
+    this.$parent.setTitle("");
     this.$parent.setShowHands(true);
   },
   methods: {
@@ -95,7 +97,7 @@ export default {
 <style lang="scss" scoped>
 .bottom {
   position: absolute;
-  bottom: 60px;
+  bottom: 0;
   width: 100%;
   display: flex;
   flex-direction: column;

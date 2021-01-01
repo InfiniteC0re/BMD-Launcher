@@ -7,8 +7,8 @@
     xmlns="http://www.w3.org/2000/svg"
     :style="iconStyle"
   >
-    <rect width="5" height="23" rx="2.5" fill="#fff" />
-    <rect x="11" width="5" height="23" rx="2.5" fill="#fff" />
+    <rect width="5" height="23" rx="2.5" :fill="color" />
+    <rect x="11" width="5" height="23" rx="2.5" :fill="color" />
   </svg>
 </template>
 
