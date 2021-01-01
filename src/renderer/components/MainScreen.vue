@@ -73,6 +73,7 @@ export default {
   mounted() {
     this.$store.commit("setHideHeader", false);
     this.$parent.setLogo(0);
+    this.$parent.setTopOffset(12);
     this.$parent.setTitle("Серверы");
     this.$parent.setShowHands(false);
   },

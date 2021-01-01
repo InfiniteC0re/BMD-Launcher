@@ -8,6 +8,7 @@
       xmlns="http://www.w3.org/2000/svg"
       v-if="logoType == 0"
       class="logo"
+      :style="{top: topOffset}"
     >
       <path
         fill-rule="evenodd"
@@ -482,6 +483,10 @@ export default {
       type: String,
       default: "",
     },
+    topOffset: {
+      type: Number,
+      default: 12
+    }
   },
 };
 </script>
@@ -498,12 +503,10 @@ export default {
   position: absolute;
   left: 50%;
   transform: translate(-50%);
-  top: 12px;
   z-index: 9999999;
 }
 .logo-title {
   position: absolute;
-  top: 59px;
   transform: translate(-50%);
   left: 50%;
   z-index: 9999;
@@ -511,5 +514,6 @@ export default {
   text-transform: uppercase;
   margin-top: 4px;
   font-weight: bold;
+  top: 59px;
 }
 </style>

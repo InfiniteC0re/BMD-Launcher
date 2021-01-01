@@ -14,7 +14,7 @@
           src="https://w.soundcloud.com/player/?url=https://api.soundcloud.com/playlists/1024488982%3Fsecret_token%3Ds-t3rIoE0luqj&color=%23e81387&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"
         ></iframe>
       </div>
-      <Background :logoType="logoType" :showHands="showHands" :title="title" />
+      <Background :logoType="logoType" :showHands="showHands" :title="title" :topOffset="topOffset" />
       <transition name="slide" mode="out-in" class="full">
         <router-view id="__router"></router-view>
       </transition>
@@ -79,7 +79,8 @@ export default {
       largeImageKey: "bmd",
       instance: true,
     },
-    title: ""
+    title: "",
+    topOffset: 59,
   }),
   methods: {
     setLogo(i) {
@@ -90,6 +91,9 @@ export default {
     },
     setTitle(t) {
       this.title = t;
+    },
+    setTopOffset(i) {
+      this.topOffset = i < 0 ? 59 : i;
     },
     toHHMMSS(secs) {
       var sec_num = parseInt(secs, 10);
@@ -150,7 +154,8 @@ export default {
             newRPC.details = "Слушает музыку";
             newRPC.state = this.sound.title;
 
-            newRPC.endTimestamp = this.$store.state.soundCloud.startTime + this.sound.duration;
+            newRPC.endTimestamp =
+              this.$store.state.soundCloud.startTime + this.sound.duration;
           }
 
           if (JSON.stringify(newRPC) != JSON.stringify(this.lastRPC)) {

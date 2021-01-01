@@ -67,6 +67,7 @@ export default {
   mounted() {
     this.$store.commit("setHideHeader", true);
     this.$parent.setLogo(0);
+    this.$parent.setTopOffset(59);
     this.$parent.setTitle("");
     this.$parent.setShowHands(true);
   },
